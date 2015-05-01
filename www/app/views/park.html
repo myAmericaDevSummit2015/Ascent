@@ -1,0 +1,23 @@
+<div class="bottom-panel container-fluid">
+	<div class="row title-row">
+		<div class="col-md-12">
+			<h1>{{ recarea.RecAreaName }} </h1>
+		</div>
+	</div>
+	<div class="row detail-row">
+		<div class="col-md-12">
+			<p> {{ recarea.RecAreaDescription }} </p>
+		</div>
+	</div>
+	<div class="row photo-row">
+		<div id="photoCarousel">
+			<div ng-repeat="photo in photos" class="carousel-photo">
+				<img ng-src="{{photo}}">
+			</div>
+		</div>
+	</div>
+	<div class="row action-row">
+		<a ng-href="#/"><button class="btn btn-default">Back to Map</button></a>
+		<button ng-click="checkIn()" class="btn btn-default">I'm here!</button>
+	</div>
+</div>

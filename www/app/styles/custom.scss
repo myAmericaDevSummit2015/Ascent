@@ -1,0 +1,243 @@
+
+.navbar {
+	margin-bottom: 0px;
+}
+
+.header {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.angular-mapbox-map {
+  position: absolute;
+  min-height: 350px !important;
+  height: 100% !important;
+  width: 100% !important;
+  z-index: -1;
+}
+
+.main-area {
+  z-index: 1;
+	padding-left: 0px;
+  height: 480px;
+}
+
+.geolocation-button {
+	position: absolute;
+	top: 25px;
+	right: 25px;
+	width: 50px;
+	height: 50px;
+
+	button {
+		padding: 3px;
+		img {
+			width: 25px;
+			height: 25px;
+		}
+	}
+}
+
+.map-action-buttons {
+	position: absolute;
+	left: 50%;
+	margin-left: -125px;
+	top: 75px;
+}
+
+$dark-blue: #2c3e50;
+
+.bottom-panel {
+	position: absolute;
+	background: white;
+	bottom: 0px;
+	width: 100%;
+
+	.title-row {
+		color: white;
+		background-color: $dark-blue;
+		padding-left: 10px;
+
+		h1 {
+			font-size: 18px;
+		}
+	}
+
+	.detail-row {
+		padding-left: 10px;
+	}
+
+  .action-row {
+    margin-left: 100px;
+    padding-bottom: 10px;
+  }
+
+	.photo-row {
+
+		.slick-carousel {
+			.slick-prev:before, .slick-next:before {
+				color: black !important;
+			}
+		}
+		.carousel-photo {
+			height: 75px;
+			width: 100px !important;
+			padding-right: 5px;
+			padding-left: 5px;
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+
+
+}
+
+#loadingIndicator {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  margin-left: -25px;
+  height: 50px;
+  width: 50px;
+  z-index: 1;
+  display: none;
+}
+
+body {
+  padding-top: 50px;
+  background: #212F3E;
+}
+.text-center {
+  padding-top: 20px;
+}
+.col-xs-12 {
+  background-color: #fff;
+}
+#sidebar {
+  height: 100%;
+  padding-right: 0;
+  padding-top: 20px;
+}
+#sidebar .nav {
+  width: 95%;
+}
+#sidebar li {
+  border:0px;
+  border-style: none;
+  margin: 2px;
+}
+
+/* collapsed sidebar styles */
+@media screen and (max-width: 767px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+  }
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -41.6%;
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -41.6%;
+  }
+  .row-offcanvas-right.active {
+    right: 41.6%;
+  }
+  .row-offcanvas-left.active {
+    left: 41.6%;
+  }
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 41.6%;
+  }
+  #sidebar {
+    padding-top:0;
+  }
+  .uploadButton {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 0px;
+    border-color: transparent;
+  }
+  .scanBonus {
+    background: #28384B;
+    padding: 10px 15px;
+    float: left;
+    text-align: left;
+    width: 100%;
+  }
+  .menuItem {
+    background: #28384B;
+    border-style: none;
+    border-width: 0px;
+  }
+  .scanBonus:hover {
+    color: #FFF;
+    text-decoration: none;
+    background: #80C476;
+  }
+  .navbarOr {
+    background: #323232;
+    color: #FFF;
+  }
+  a {
+    color: #FFF;
+  }
+  .nav > li > a:hover, .nav > li > a:focus  {
+    color: #FFF;
+    text-decoration: none;
+    background: #80C476;
+  }
+  .userName {
+    color: #FFF;
+    font-size: 1.5em;
+    text-align: center;
+  }
+  .profilePic {
+    max-width: 50%;
+    max-height: 50%;
+    margin: 0 25%;
+    border-radius: 50% 50%;
+  }
+  .sidebarIcon {
+    max-height: 1.5em;
+    vertical-align: text-top;
+    padding-right: 1em;
+  }
+  .navbar-default .navbar-toggle {
+    border: 0px;
+    border-style: none;
+  }
+  .navbar-default .navbar-brand {
+    color: #FFF;
+  }
+  .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+    color: #80C476;
+  }
+  .navbar-default .navbar-toggle .icon-bar {
+    background-color: #FFF;
+  }
+  .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background: transparent;
+  }
+  a:focus {
+    outline: none;
+  }
+  .teamName {
+    color: #fff;
+    text-align: center;
+  }
+  .pointRank {
+    color: #80C476;
+    text-align: center;
+  }
+}

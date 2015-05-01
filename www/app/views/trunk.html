@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+
+<title>Trunk-js Plain</title>
+
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="viewport" content="initial-scale=1.0,user-scalable=no,width=device-width,maximum-scale=1" media="(device-height: 568px)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="HandheldFriendly" content="True">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<!-- Style Sheets -->
+<link rel="stylesheet" type="text/css" media="all" href="styles/reset.css" />
+<link rel="stylesheet" type="text/css" media="all" href="styles/trunk.css" />
+
+<!-- Scripts -->
+<script type="text/javascript">
+	if (typeof jQuery == 'undefined')
+		document.write(unescape("%3Cscript src='scripts/trunk/jquery-1.9.js'" +
+															"type='text/javascript'%3E%3C/script%3E"))
+</script>
+<script type="text/javascript" language="javascript" src="script/trunk/trunk.js"></script>
+<!--[if lt IE 9]>
+<script src="script/trunk/html5shiv.js"></script>
+<![endif]-->
+
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/mapbox.js/mapbox.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/custom.css">
+  <!-- endbuild -->
+
+</head>
+
+<body ng-app="myAmericaApp">
+
+<div class="container">
+
+	<header class="slide">     <!--	Add "slideRight" class to items that move right when viewing Nav Drawer  -->
+		<ul id="navToggle" class="burger slide">    <!--	Add "slideRight" class to items that move right when viewing Nav Drawer  -->
+			<li></li><li></li><li></li>
+		</ul>
+		<h1>Trunk.js</h1>
+	</header>
+
+	<nav class="slide">
+		<ul>
+			<li><a href="../trunk.html" class="active">HOME</a></li>
+			<li><a href="#">LINK TWO</a></li>
+			<li><a href="#">LINK THREE</a></li>
+			<li><a href="#">LINK FOUR</a></li>
+			<li><a href="#">LINK FIVE</a></li>
+			<li><a href="#">LINK SIX</a></li>
+			<li><a href="#">LINK SEVEN</a></li>
+		</ul>
+	</nav>
+
+	<div class="content slide">     <!--	Add "slideRight" class to items that move right when viewing Nav Drawer  -->
+		<ul class="responsive">
+			<li class="header-section">
+			</li>
+			<li class="body-section">
+
+        <div ng-controller="MapCtrl" ng-cloak>
+          <style>
+            .angular-mapbox-map {
+              position: absolute;
+              top: 50px;
+              height: 350px !important;
+              width: 100% !important;
+              z-index: -1;
+            }
+            .map-options {
+              padding-top: 20px;
+              height: 400px;
+            }
+
+            #loadingIndicator {
+              position: absolute;
+              top: 200px;
+              left: 50%;
+              margin-left: -25px;
+              height: 50px;
+              width: 50px;
+              z-index: 1;
+              display: none;
+            }
+          </style>
+          <div>
+            <img id="loadingIndicator" src="/images/loader.gif">
+            <mapbox map-id="efwiz.ln2kghlc" lat="37.98" lng="-100.487" zoom="4">
+              <marker ng-repeat="recarea in recareas"
+                      lat="{{recarea.RecAreaLatitude}}"
+                      lng="{{recarea.RecAreaLongitude}}"
+                      color="green" icon="park">
+                <h1>{{recarea.RecAreaName}}</h1>
+              </marker>
+            </mapbox>
+          </div>
+
+          <div class="btn-group map-action-buttons">
+            <button type="button" class="btn btn-default">Search</button>
+            <button ng-click="locate()" type="button" class="btn btn-default">Where Am I?</button>
+            <button type="button" class="btn btn-default">View Scores</button>
+          </div>
+
+          <div ng-view=""></div>
+        </div>
+			</li>
+			<li class="footer-section">
+			</li>
+		</ul>
+	</div>
+
+</div>
+
+
+  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+  <script>
+    !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+      (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+      r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+    }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+  </script>
+
+  <script src="scripts/lib/flickrapi/flickrapi.js"></script>
+  <script src="scripts/lib/mapbox.js/mapbox.uncompressed.js"></script>
+
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/angular-mapbox/dist/angular-mapbox.js"></script>
+  <script src="bower_components/mapbox.js/mapbox.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <script src="scripts/app.js"></script>
+
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/about.js"></script>
+  <script src="scripts/controllers/map.js"></script>
+  <script src="scripts/controllers/park.js"></script>
+  <script src="scripts/controllers/reader.js"></script>
+
+  <script src="scripts/services/recareas.js"></script>
+  <script src="scripts/services/recarea.js"></script>
+  <!-- endbuild -->
+
+
+</body>
+</html>
+
+
+
+
+
+
+

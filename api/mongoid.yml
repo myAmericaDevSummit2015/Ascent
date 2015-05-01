@@ -1,0 +1,15 @@
+development:
+  sessions:
+    default:
+      database: mydb
+      hosts:
+        - localhost:8081
+      username: ADD_USERNAME_HERE
+      password: ADD_PASSWORD_HERE
+production:
+  sessions:
+    default:
+      uri: <%= ENV['MONGOHQ<em>URL'] %>
+      options:
+        skip_version_check: true
+        safe: true

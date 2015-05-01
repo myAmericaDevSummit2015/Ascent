@@ -1,0 +1,176 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/mapbox.js/mapbox.css" />
+    <link rel="stylesheet" href="bower_components/slick.js/slick/slick.css" />
+    <link rel="stylesheet" href="bower_components/slick.js/slick/slick-theme.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/custom.css">
+    <!-- endbuild -->
+
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('[data-toggle=offcanvas]').click(function() {
+          $('.row-offcanvas').toggleClass('active');
+        });
+      });
+    </script>
+    <script>
+      $(window).load(function () {
+        $('#browse-click').on('click', function () { // use .live() for older versions of jQuery
+          $('#file').click();
+          setInterval(intervalFunc, 1);
+          return false;
+        });
+      });
+    </script>
+
+
+  </head>
+  <body ng-app="myAmericaApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="page-container">
+
+      <!-- top navbar -->
+      <div class="navbar navbar-default navbar-fixed-top navbarOr" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".sidebar-nav">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+              <img src="/images/ascentLogo.png" style="
+                max-height: 100%;
+              ">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row row-offcanvas row-offcanvas-left">
+
+          <!-- sidebar -->
+          <div ng-controller="UserCtrl" class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <ul class="nav">
+              <li ng-show="!loggedIn">
+                <input ng-model="userName" placeholder="Username" ng-enter="logIn(userName)">
+              </li>
+              <li ng-show="loggedIn"><div class="userName">Welcome, {{ user.firstName }}!</div></li>
+              <li ng-show="loggedIn" style="text-align: center">
+                <button ng-click="logOut()" class="btn btn-default logout-button">Log out</button>
+              </li>
+              <li><img src="images/profile picture.png" class="profilePic"/></li>
+              <li ng-show="loggedIn"><div class="teamName">{{ user.clan | uppercase }} CLAN</div></li>
+              <li ng-show="loggedIn"><div class="pointRank"> POINTS: {{ user.score }} | RANK: 1</div></li>
+              <li class="active menuItem"><a href="#/map/user"><img src="images/Icons/currentConquests.png" class="sidebarIcon" />Current Conquests</a></li>
+              <li class="menuItem"><a href="#"><img src="images/Icons/futureConquests.png" class="sidebarIcon" />Future Conquests</a></li>
+              <li class="menuItem"><a href="#"><img src="images/Icons/leaderboard.png" class="sidebarIcon" />Leaderboard</a></li>
+              <li class="menuItem"><form enctype="multipart/form-data" action="http://api.qrserver.com/v1/read-qr-code/" method="POST">
+                <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
+                <a href="#"><div id="browse-click" class="uploadButton scanBonus"><img src="images/Icons/scanBonus.png" class="sidebarIcon" />Scan Bonus</div></a>
+                <input ng-hide="true" id="file" name="file" type="file" accept="image/*" capture="camera" onchange="this.form.submit()"/>
+              </form></li>
+            </ul>
+          </div>
+
+          <!-- main area -->
+          <div class="col-xs-12 col-sm-9 main-area">
+
+            <!-- Add your site or application content here -->
+            <div ng-controller="MapCtrl" ng-cloak>
+              <div>
+                <img id="loadingIndicator" src="/images/loader.gif">
+                <mapbox map-id="efwiz.ln2kghlc" lat="37.98" lng="-100.487" zoom="4">
+                  <marker ng-repeat="marker in markers"
+                          lat="{{marker.location.latitude}}"
+                          lng="{{marker.location.longitude}}"
+                          color="{{marker.color}}" icon="{{marker.icon}}">
+                    <a ng-href="#/park/{{marker.location.recAreaId}}"><h1>{{marker.location.recArea.RecAreaName}}</h1></a>
+                  </marker>
+                </mapbox>
+
+                <div ng-view=""></div>
+
+                <div class="btn-group geolocation-button">
+                  <button ng-click="locate()" class="btn btn-default">
+                    <img src="./images/Icons/currentLocation.png">
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /.col-xs-12 main -->
+        </div><!--/.row-->
+      </div><!--/.container-->
+    </div><!--/.page-container-->
+
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/lib/flickrapi/flickrapi.js"></script>
+    <script src="scripts/lib/mapbox.js/mapbox.uncompressed.js"></script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-mapbox/dist/angular-mapbox.js"></script>
+    <script src="bower_components/mapbox.js/mapbox.js"></script>
+    <script src="bower_components/slick.js/slick/slick.min.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/map.js"></script>
+        <script src="scripts/controllers/park.js"></script>
+        <script src="scripts/controllers/user.js"></script>
+        <script src="scripts/controllers/reader.js"></script>
+
+        <script src="scripts/services/recareas.js"></script>
+        <script src="scripts/services/recarea.js"></script>
+        <script src="scripts/services/users.js"></script>
+        <script src="scripts/services/leaderboard.js"></script>
+        <script src="scripts/services/locations.js"></script>
+
+        <script src="scripts/directives/ngEnter.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
